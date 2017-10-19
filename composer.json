@@ -6,9 +6,7 @@
             "email": "tm.paulo.santos@gmail.com"
         }
     ],
-    "require": {
-        "php": "^7.0"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "App\\": "app"
