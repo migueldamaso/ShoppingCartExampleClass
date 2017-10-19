@@ -90,4 +90,18 @@ $item->increaseQuatity(1)->addExtraValue(10.20);
  $dollar = ShoppingCart::DOLLAR;
  ```
  
+ **Example 6:**
+ ```
+ // if you wanna flush all items from the cart
+ $cart->flush();
+ ```
+ 
+ **Example 7:**
+ ```
+ // if you wanna extract the cart itself
+ echo '<pre>';
+ print_r($cart->getItems());
+ echo '</pre>';
+ ```
+ 
  More features will be documented in the future, feel free to use or modify, it's up to you!
