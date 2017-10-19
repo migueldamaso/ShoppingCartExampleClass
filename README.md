@@ -52,5 +52,17 @@ echo 'The cart value is ' . $cart;
 $item = new Item('Desktop', 560.30, 1);
 $item->increaseQuatity(1)->addExtraValue(10.20);
  ```
+ **Example 5:**
+ ```
+ /**
+  * Currencies simbols can be accessed as staic property like the example below
+  * All symbols are placed into App\ShoppingCart\Currencies abstract class
+  */
+ // will return € simbol
+ $euro = ShoppingCart::EURO;
+  
+ // will return $ simbol
+ $dollar = ShoppingCart::DOLLAR;
+ ```
  
  More features will be documented in the future, feel free to use or modify, it's up to you!
