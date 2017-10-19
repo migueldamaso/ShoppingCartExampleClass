@@ -1,5 +1,5 @@
 # ShoppingCartExampleClass
-Shopping Cart class that allows that allows the injection of items into a cart.
+The Shopping Cart class allows the injection of items into a cart.
 
 To initialize this example just run this command into the root of the project.
 
