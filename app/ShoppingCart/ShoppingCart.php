@@ -1,15 +1,15 @@
 <?php 
 
-namespace App\ShoppingCart;
+namespace ShoppingCart\ShoppingCart;
 
-use App\ShoppingCart\Currencies;
-use App\ShoppingCart\Contracts\{ShoppingCartContract, ItemContract};
-use App\ShoppingCart\Exceptions\ItemContractMissingException;
+use ShoppingCart\ShoppingCart\Currencies;
+use ShoppingCart\ShoppingCart\Contracts\{ShoppingCartContract, ItemContract};
+use ShoppingCart\ShoppingCart\Exceptions\ItemContractMissingException;
 
 final class ShoppingCart extends Currencies implements ShoppingCartContract
 {
     /**
-     * @var collection of App\ShoppingCart\Contracts\ItemContract instance
+     * @var collection of ShoppingCart\ShoppingCart\Contracts\ItemContract instance
      */
     private $carrinho = [];
 
@@ -47,7 +47,7 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
                 if ($item instanceof ItemContract) {
                     $total += $item->getValue() * $item->getQuantity();
                 } else {
-                    throw new ItemContractMissingException('The index [' . $index . '] of CarrinhoDeCompras::$items must implement the contract "CarrinhoContract".');
+                    throw new ItemContractMissingException('The index [' . $index . '] of ShoppingCart::$items must implement the contract "ShoppingCartContract".');
                 }
             }
         }

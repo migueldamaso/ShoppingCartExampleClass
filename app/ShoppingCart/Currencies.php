@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\ShoppingCart;
+namespace ShoppingCart\ShoppingCart;
 
 /**
  * All currency symbols available

@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\ShoppingCart\Contracts;
+namespace ShoppingCart\ShoppingCart\Contracts;
 
 interface ItemContract 
 {

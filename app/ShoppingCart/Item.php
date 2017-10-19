@@ -1,8 +1,8 @@
 <?php 
 
-namespace App\ShoppingCart;
+namespace ShoppingCart\ShoppingCart;
 
-use App\ShoppingCart\Contracts\ItemContract;
+use ShoppingCart\ShoppingCart\Contracts\ItemContract;
 
 final class Item implements ItemContract 
 {
