@@ -11,7 +11,7 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
     /**
      * @var collection of ShoppingCart\ShoppingCart\Contracts\ItemContract instance
      */
-    private $carrinho = [];
+    private $cart = [];
 
     /**
      * @var string currency symbol
@@ -27,9 +27,7 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
      */
     public function __construct(array $items = [], string $currency = '')
     {
-        if (count($items) > 0) {
-            $this->carrinho = $items;
-        }
+        $this->setItems($items);
         $this->currency = $currency;
     }
 
@@ -42,8 +40,8 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
     {
         $total = 0;
 
-        if (count($this->carrinho) > 0) {
-            foreach ($this->carrinho as $index => $item) {
+        if (count($this->cart) > 0) {
+            foreach ($this->cart as $index => $item) {
                 if ($item instanceof ItemContract) {
                     $total += $item->getValue() * $item->getQuantity();
                 } else {
@@ -74,5 +72,36 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
     public function __toString(): string
     {
         return $this->calculate() . ' ' . $this->currency;
+    }
+
+    /**
+     * Return all items inside the cart
+     *
+     * @return array
+     */
+    public function getItems()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * Set items in cart
+     *
+     * @return void
+     */
+    public function setItems(array $items = []): void
+    {
+        $this->cart = count($items) > 0 ? $items : [];
+    }
+
+    /**
+     * Remove all items inside the cart
+     *
+     * @return ShoppingCart instance
+     */
+    public function flush(): ShoppingCart
+    {
+        $this->cart = [];
+        return $this;
     }
 }

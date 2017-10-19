@@ -17,3 +17,8 @@ $cart = new ShoppingCart([
 echo 'With IVA: ' . $cart->calculate() . '<br />';
 echo 'Without IVA: ' . $cart->calculateWithIva(23) . '<br />';
 echo 'You shopping cart value is ' . $cart . '<br />';
+
+echo '<br /><br />';
+echo '<pre>';
+print_r($cart->getItems());
+echo '</pre>';
