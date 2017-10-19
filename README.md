@@ -1,5 +1,5 @@
 # ShoppingCartExampleClass
-Shopping Cart class that allows to inject items into cart.
+Shopping Cart class that allows that allows the injection of items into a cart.
 
 To initialize this example just run this command into the root of the project.
 
@@ -12,8 +12,8 @@ $ php -S 127.0.0.1:1111 -t public public/index.php
 /**
  * create an item,
  * the first param is the name
- * second amount
- * quantity
+ * the second the price
+ * and the third it's quantity
  */
 $item1 = new Item('Desktop', 650.90, 1);
 $item2 = new Item('Keyboard', 100.00, 2);
@@ -22,7 +22,7 @@ $item2 = new Item('Keyboard', 100.00, 2);
 **Example 2:**
 ```
 /**
- * Cart will take an array of items (required)
+ * The ShoppingCart will take an array of Items (required)
  * Currency symbol (available in \App\ShoppingCart\Currencies::class)
  */
 $cart = new ShoppingCart([
@@ -33,20 +33,20 @@ $cart = new ShoppingCart([
  
  **Example 3:**
  ```
-// calculate the amount of the cart without IVA 
+// calculate the total price of the items in the cart without IVA 
 echo 'Without IVA: ' . $cart->calculate() . '<br />';
 
-// calculate the amount of the cart with IVA 
+// calculate the total price of the items in the cart with IVA 
 echo 'With IVA: ' . $cart->calculateWithIva(23) . '<br />';
 
-// calculate the amount of the cart without IVA 
+// calculate the total price of the items in the cart without IVA 
 echo 'The cart value is ' . $cart;
  ```
  
  **Example 4:**
  ```
  /**
-  * In items you can do some operations like adding an extra value or increase the amout
+  * In items you can do some operations like adding an extra value or increase the amount
   * these operations ca be chained
   */
 $item = new Item('Desktop', 560.30, 1);
@@ -55,7 +55,7 @@ $item->increaseQuatity(1)->addExtraValue(10.20);
  **Example 5:**
  ```
  /**
-  * Currencies simbols can be accessed as staic property like the example below
+  * Currencies simbols can be accessed as static properties like the example below
   * All symbols are placed into App\ShoppingCart\Currencies abstract class
   */
  // will return € simbol
