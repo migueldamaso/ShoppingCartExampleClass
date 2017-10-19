@@ -43,4 +43,14 @@ echo 'With IVA: ' . $cart->calculateWithIva(23) . '<br />';
 echo 'The cart value is ' . $cart;
  ```
  
+ **Example 4:**
+ ```
+ /**
+  * In items you can do some operations like adding an extra value or increase the amout
+  * these operations ca be chained
+  */
+$item = new Item('Desktop', 560.30, 1);
+$item->increaseQuatity(1)->addExtraValue(10.20);
+ ```
+ 
  More features will be documented in the future, feel free to use or modify, it's up to you!
