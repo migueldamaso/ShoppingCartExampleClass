@@ -7,6 +7,31 @@ To initialize this example just run this command into the root of the project.
 $ php -S 127.0.0.1:1111 -t public public/index.php
 ```
 
+**Class usage:**
+```
+
+// import package to your project
+use App\ShoppingCart\{ShoppingCart, Item};
+
+// create any items you want
+$desktop = new Item('Desktop', 650.90, 1);
+$keyboard = new Item('Keyboard', 110, 1);
+$mouse = new Item('Mouse', 20, 4);
+
+// create a new instance of ShoppingCart and pass the items as an array of items
+$cart = new ShoppingCart([
+    $desktop,
+    $keyboard,
+    $mouse,
+], ShoppingCart::EURO);
+
+// finnaly create operations on the cart
+echo 'With IVA: ' . $cart->calculate() . '<br />';
+echo 'Without IVA: ' . $cart->calculateWithIva(23) . '<br />';
+echo 'You shopping cart value is ' . $cart . '<br />';
+
+```
+
 **Example 1:**
 ```
 /**
