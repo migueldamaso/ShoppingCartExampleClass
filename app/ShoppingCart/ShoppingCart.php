@@ -2,6 +2,7 @@
 
 namespace ShoppingCart\ShoppingCart;
 
+use ShoppingCart\ShoppingCart\Item;
 use ShoppingCart\ShoppingCart\Currencies;
 use ShoppingCart\ShoppingCart\Contracts\{ShoppingCartContract, ItemContract};
 use ShoppingCart\ShoppingCart\Exceptions\ItemContractMissingException;
@@ -139,5 +140,15 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
         sort($this->cart);
 
         return $removed;
+    }
+
+    /**
+     * Add an item to the cart
+     *
+     * @return
+     */
+    public function addItem(Item $item)
+    {
+        // not ready yet...
     }
 }
