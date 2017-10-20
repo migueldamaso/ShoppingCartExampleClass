@@ -1,10 +1,36 @@
-# ShoppingCartExampleClass
+
+# Shopping Cart Class
 The Shopping Cart class allows the injection of items into a cart.
 
 To initialize this example just run this command into the root of the project.
 
 ```
 $ php -S 127.0.0.1:1111 -t public public/index.php
+```
+
+**Class usage:**
+```
+
+// import package to your project
+use App\ShoppingCart\{ShoppingCart, Item};
+
+// create any items you want
+$desktop = new Item('Desktop', 650.90, 1);
+$keyboard = new Item('Keyboard', 110, 1);
+$mouse = new Item('Mouse', 20, 4);
+
+// create a new instance of ShoppingCart and pass the items as an array of items
+$cart = new ShoppingCart([
+    $desktop,
+    $keyboard,
+    $mouse,
+], ShoppingCart::EURO);
+
+// finnaly create operations on the cart
+echo 'With IVA: ' . $cart->calculate() . '<br />';
+echo 'Without IVA: ' . $cart->calculateWithIva(23) . '<br />';
+echo 'You shopping cart value is ' . $cart . '<br />';
+
 ```
 
 **Example 1:**
@@ -63,6 +89,29 @@ $item->increaseQuatity(1)->addExtraValue(10.20);
   
  // will return $ simbol
  $dollar = ShoppingCart::DOLLAR;
+ ```
+ 
+ **Example 6:**
+ ```
+ // if you wanna flush all items from the cart
+ $cart->flush();
+ ```
+ 
+ **Example 7:**
+ ```
+ // if you wanna extract the cart itself
+ echo '<pre>';
+ print_r($cart->getItems());
+ echo '</pre>';
+ ```
+
+ **Example 8:**
+ ```
+ // to remove single item from the cart, just pass the id of the item
+ $cart->removeItem(25);
+
+ // or you can remove multiple items passing an array of id's
+$cart->removeItem([25, 2, 80]);
  ```
  
  More features will be documented in the future, feel free to use or modify, it's up to you!

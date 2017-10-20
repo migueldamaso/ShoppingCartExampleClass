@@ -1,17 +1,18 @@
 <?php 
 
-namespace App\ShoppingCart;
+namespace ShoppingCart\ShoppingCart;
 
-use App\ShoppingCart\Currencies;
-use App\ShoppingCart\Contracts\{ShoppingCartContract, ItemContract};
-use App\ShoppingCart\Exceptions\ItemContractMissingException;
+use ShoppingCart\ShoppingCart\Item;
+use ShoppingCart\ShoppingCart\Currencies;
+use ShoppingCart\ShoppingCart\Contracts\{ShoppingCartContract, ItemContract};
+use ShoppingCart\ShoppingCart\Exceptions\ItemContractMissingException;
 
 final class ShoppingCart extends Currencies implements ShoppingCartContract
 {
     /**
-     * @var collection of App\ShoppingCart\Contracts\ItemContract instance
+     * @var collection of ShoppingCart\ShoppingCart\Contracts\ItemContract instance
      */
-    private $carrinho = [];
+    private $cart = [];
 
     /**
      * @var string currency symbol
@@ -27,9 +28,7 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
      */
     public function __construct(array $items = [], string $currency = '')
     {
-        if (count($items) > 0) {
-            $this->carrinho = $items;
-        }
+        $this->setItems($items);
         $this->currency = $currency;
     }
 
@@ -42,16 +41,16 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
     {
         $total = 0;
 
-        if (count($this->carrinho) > 0) {
-            foreach ($this->carrinho as $index => $item) {
+        if (count($this->cart) > 0) {
+            foreach ($this->cart as $index => $item) {
                 if ($item instanceof ItemContract) {
                     $total += $item->getValue() * $item->getQuantity();
                 } else {
-                    throw new ItemContractMissingException('The index [' . $index . '] of CarrinhoDeCompras::$items must implement the contract "CarrinhoContract".');
+                    throw new ItemContractMissingException('The index [' . $index . '] of ShoppingCart::$items must implement the contract "ShoppingCartContract".');
                 }
             }
         }
-        return number_format($total, 2);
+        return $total;
     }
 
     /**
@@ -74,5 +73,82 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
     public function __toString(): string
     {
         return $this->calculate() . ' ' . $this->currency;
+    }
+
+    /**
+     * Return all items inside the cart
+     *
+     * @return array
+     */
+    public function getItems()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * Set items in cart
+     *
+     * @return void
+     */
+    public function setItems(array $items = []): void
+    {
+        $this->cart = count($items) > 0 ? $items : [];
+    }
+
+    /**
+     * Remove all items inside the cart
+     *
+     * @return ShoppingCart instance
+     */
+    public function flush(): ShoppingCart
+    {
+        $this->cart = [];
+        return $this;
+    }
+
+    /**
+     * Remove a single item from the cart
+     *
+     * @param int $id of the item to remove
+     * @return boolean
+     */
+    public function removeItem($id): bool
+    {
+        $removed = false;
+
+        if (!is_array($id)) {
+            $this->cart = array_filter($this->cart, function ($item) use ($id, &$removed) {
+                if ($item->getId() != $id) {
+                    return $item;
+                } else {
+                    $removed = true;
+                }
+            });
+        } else {
+
+            $filteredCart = [];
+
+            foreach ($this->cart as $item) {
+                if (!in_array($item->getId(), $id)) {
+                    $filteredCart[] = $item;
+                    $removed = true;
+                }
+            }
+            $this->cart = $filteredCart;
+        }
+
+        sort($this->cart);
+
+        return $removed;
+    }
+
+    /**
+     * Add an item to the cart
+     *
+     * @return
+     */
+    public function addItem(Item $item)
+    {
+        // not ready yet...
     }
 }
