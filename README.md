@@ -15,9 +15,9 @@ $ php -S 127.0.0.1:1111 -t public public/index.php
 use App\ShoppingCart\{ShoppingCart, Item};
 
 // create any items you want
-$desktop = new Item('Desktop', 650.90, 1);
-$keyboard = new Item('Keyboard', 110, 1);
-$mouse = new Item('Mouse', 20, 4);
+$desktop = new Item(20, 'Desktop', 650.90, 1);
+$keyboard = new Item(85, 'Keyboard', 110, 1);
+$mouse = new Item(39, 'Mouse', 20, 4);
 
 // create a new instance of ShoppingCart and pass the items as an array of items
 $cart = new ShoppingCart([
@@ -37,12 +37,13 @@ echo 'You shopping cart value is ' . $cart . '<br />';
 ```
 /**
  * create an item,
- * the first param is the name
- * the second the price
- * and the third it's quantity
+ * the first param is id of the item
+ * the second param is the name
+ * the third param amount
+ * quantity
  */
-$item1 = new Item('Desktop', 650.90, 1);
-$item2 = new Item('Keyboard', 100.00, 2);
+$item1 = new Item(20, 'Desktop', 650.90, 1);
+$item2 = new Item(50, 'Keyboard', 100.00, 2);
 ```
 
 **Example 2:**
