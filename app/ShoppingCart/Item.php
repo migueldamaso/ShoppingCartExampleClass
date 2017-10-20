@@ -7,6 +7,11 @@ use ShoppingCart\ShoppingCart\Contracts\ItemContract;
 final class Item implements ItemContract 
 {
     /**
+     * @var id of the item
+     */
+    private $id;
+
+    /**
      * @var string name of the item
      */
     private $name;
@@ -24,16 +29,40 @@ final class Item implements ItemContract
     /**
      * Initialize details of the item
      *
+     * @param int $id of the item
      * @param string $name name of the item
      * @param float $value value of the item
      * @param int $quantity quantity of the item
      * @return void
      */
-    public function __construct(string $name, float $value, int $quantity)
+    public function __construct(int $id, string $name, float $value, int $quantity)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->value = $value;
         $this->quantity = $quantity;
+    }
+
+    /**
+     * Set the id of the item
+     *
+     * @param string $name name of the item
+     * @return instance of App\ShoppingCart\Item
+     */
+    public function setId(int $id): Item
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * Return the name of the item
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**
@@ -55,7 +84,7 @@ final class Item implements ItemContract
      */
     public function getName(): string
     {
-        return $this->name = $name;
+        return $this->name;
     }
 
     /**

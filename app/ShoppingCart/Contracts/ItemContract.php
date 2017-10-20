@@ -7,12 +7,13 @@ interface ItemContract
     /**
      * Initialize details of the item
      *
+     * @param int $id of the item
      * @param string $name name of the item
      * @param float $value value of the item
      * @param int $quantity quantity of the item
      * @return void
      */
-    public function __construct(string $name, float $value, int $quantity);
+    public function __construct(int $id, string $name, float $value, int $quantity);
 
     /**
      * Get the price of the item

@@ -104,4 +104,27 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
         $this->cart = [];
         return $this;
     }
+
+    /**
+     * Remove a single item from the cart
+     *
+     * @param int $id of the item to remove
+     * @return boolean
+     */
+    public function removeItem(int $id): bool
+    {
+        $removed = false;
+
+        $this->cart = array_filter($this->cart, function ($item) use ($id, &$removed) {
+            if ($item->getId() != $id) {
+                return $item;
+            } else {
+                $removed = true;
+            }
+        });
+
+        sort($this->cart);
+
+        return $removed;
+    }
 }

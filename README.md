@@ -103,5 +103,11 @@ $item->increaseQuatity(1)->addExtraValue(10.20);
  print_r($cart->getItems());
  echo '</pre>';
  ```
+
+ **Example 8:**
+ ```
+ // to remove single item from the cart, just pass the id of the item
+ $cart->removeItem(25);
+ ```
  
  More features will be documented in the future, feel free to use or modify, it's up to you!
