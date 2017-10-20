@@ -49,7 +49,7 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
                 }
             }
         }
-        return number_format($total, 2);
+        return $total;
     }
 
     /**
@@ -111,17 +111,30 @@ final class ShoppingCart extends Currencies implements ShoppingCartContract
      * @param int $id of the item to remove
      * @return boolean
      */
-    public function removeItem(int $id): bool
+    public function removeItem($id): bool
     {
         $removed = false;
 
-        $this->cart = array_filter($this->cart, function ($item) use ($id, &$removed) {
-            if ($item->getId() != $id) {
-                return $item;
-            } else {
-                $removed = true;
+        if (!is_array($id)) {
+            $this->cart = array_filter($this->cart, function ($item) use ($id, &$removed) {
+                if ($item->getId() != $id) {
+                    return $item;
+                } else {
+                    $removed = true;
+                }
+            });
+        } else {
+
+            $filteredCart = [];
+
+            foreach ($this->cart as $item) {
+                if (!in_array($item->getId(), $id)) {
+                    $filteredCart[] = $item;
+                    $removed = true;
+                }
             }
-        });
+            $this->cart = $filteredCart;
+        }
 
         sort($this->cart);
 
